@@ -9,20 +9,22 @@ import kotlinx.cli.required
 import kotlin.system.exitProcess
 
 class Decryptor(val numberSequences: Pair<Array<Int?>, Array<Int?>>, val numberStations: Map<String, Int>, val scrambledLetters: String) {
-    val cities = listOf(
+    val cities = mutableListOf(
         "Atlanta", "Baltimore", "Boston",
         "Charlotte", "Chicago", "Cincinnati",
         "Dallas", "Denver", "Detroit",
-        "Houston", "Kansas City", "Los Angeles",
-        "Madison", "Memphis", "Miami",
-        "Milwaukee", "New Orleans", "New York",
-        "Philadelphia", "Phoenix", "Pittsburgh",
-        "Richmond", "San Diego", "San Francisco",
-        "Seattle"
+        "Helena", "Houston", "Kansas City",
+        "Los Angeles", "Madison", "Memphis",
+        "Miami", "Milwaukee", "New Orleans",
+        "New York", "Philadelphia", "Phoenix",
+        "Pittsburgh", "Richmond", "San Diego",
+        "San Francisco", "Seattle", "Tucson"
     )
 
     fun unscrambleCity(): String? {
         val scrambledSorted = scrambledLetters.replace(" ", "").lowercase().toCharArray().sorted()
+
+        cities.addAll(numberStations.keys)
     
         for (city in cities) {
             val citySorted = city.replace(" ", "").lowercase().toCharArray().sorted()
